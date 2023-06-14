@@ -16,21 +16,6 @@ import Sortable from 'sortablejs'
         data() {
           return {
             drag: false,
-            myArray: [
-                {
-                    id: 1,
-                    name: 'list1'
-                },
-                {
-                    id:2,
-                    name: 'list2'
-                },
-                {
-                    id:3,
-                    name: 'list3'
-                }
-            ]
-          }
         },
         mounted() {
             var el = document.getElementById('items');
