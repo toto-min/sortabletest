@@ -16,6 +16,7 @@ import Sortable from 'sortablejs'
         data() {
           return {
             drag: false,
+          }            
         },
         mounted() {
             var el = document.getElementById('items');
