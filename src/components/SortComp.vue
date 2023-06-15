@@ -12,8 +12,8 @@
         </draggable>
 
         <ul>
-            <li :key="item.id" :id="item.id" v-for="item in contlist" style="width: 300px; height: 300px; border: 1px solid; float: left;">
-                {{ item.name }}
+            <li :key="item.id" :id="item.id" v-for="item in itemcont" style="width: 300px; height: 300px; border: 1px solid; float: left;">
+                {{ item.num + 1 }}
             </li>
         </ul>
     </div>
@@ -43,6 +43,7 @@
                     name: 'list3',
                 }
             ],
+            itemcont: [],
             contlist: [
                 {
                     id: 1,
@@ -63,16 +64,22 @@
             activeNames:''
           }            
         },
+        created() {
+            this.contlist.forEach(el => {
+                this.itemcont.push(el)
+            })
+        },
         methods: {
-            handleChange() {
-            console.log('changed');
+            handleChange(toval) {
+                this.itemcont.splice(toval.oldIndex, 1)
+                this.itemcont.splice(toval.newIndex, 0, this.contlist[toval.oldIndex])
             },
             inputChanged(value) {
                 console.log(value);
             },
             getComponentData() {
             return {
-                onChange: this.handleChange,
+                onEnd: this.handleChange,
                 onInput: this.inputChanged,
                 wrap: true,
                 value: this.activeNames
