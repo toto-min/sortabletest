@@ -71,8 +71,9 @@
         },
         methods: {
             handleChange(toval) {
+                let tempitem = this.itemcont[toval.oldIndex]
                 this.itemcont.splice(toval.oldIndex, 1)
-                this.itemcont.splice(toval.newIndex, 0, this.contlist[toval.oldIndex])
+                this.itemcont.splice(toval.newIndex, 0, tempitem)
             },
             inputChanged(value) {
                 console.log(value);
