@@ -1,23 +1,37 @@
 <template>
-    <div>
-        <draggable 
-            v-model="itemlist"
-            @start="drag=true" 
-            @end="drag=false"
-            :component-data="getComponentData()"
-            item-key="id">
-            <template #item="{element}">
-                <div>{{element.name}}</div>
-            </template>
-        </draggable>
-
-        <ul>
-            <li :key="item.id" :id="item.id" v-for="item in itemcont" style="width: 300px; height: 300px; border: 1px solid; float: left;">
+    <div style="display: flex; align-items: start; justify-content: center;">
+        <div style="margin-right: 30px;">
+            <ul>
+            <li :key="item.id" :id="item.id" v-for="item in itemcont" style="width: 200px; height: 200px; border: 1px solid;" :style="{ 'background-color' :item.color}">
                 {{ item.num + 1 }}
+                <div :id="item.num">
+                    <span>
+                        {{ item.name }}
+                    </span>
+                </div>
+                <div class="contbody">
+                    {{ item.id }} {{ item.name }}
+                </div>
             </li>
         </ul>
+        </div>
+        <div>
+            <draggable 
+                v-model="itemlist"
+                @start="drag=true" 
+                @end="drag=false"
+                :component-data="getComponentData()"
+                item-key="id">
+                <template #item="{element}">
+                    <div>{{element.name}}</div>
+                </template>
+            </draggable>
+            <div>
+                <button @click="addlist">add btn</button>
+            </div>
+        </div>
     </div>
-</template>
+</template >
 <script>
 // import Sortable from 'sortablejs'
 // import _ from 'lodash'
@@ -48,17 +62,20 @@
                 {
                     id: 1,
                     name: 'cont1',
-                    num: 0
+                    num: 0,
+                    color: 'red'
                 },
                 {
                     id:2,
                     name: 'cont2',
-                    num: 1
+                    num: 1,
+                    color: 'blue'
                 },
                 {
                     id:3,
                     name: 'cont3',
-                    num: 2
+                    num: 2,
+                    color: 'green'
                 }
             ],
             activeNames:''
@@ -70,6 +87,17 @@
             })
         },
         methods: {
+            addlist() {
+                let el = {
+                    id:4,
+                    name: 'cont4',
+                    num: 3,
+                    color: 'yellow'
+                }
+                this.itemlist.push(el)
+                this.contlist.push(el)
+                this.itemcont.push(el)
+            },
             handleChange(toval) {
                 let tempitem = this.itemcont[toval.oldIndex]
                 this.itemcont.splice(toval.oldIndex, 1)
