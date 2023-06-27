@@ -23,10 +23,13 @@
                 :component-data="getComponentData()"
                 handle=".handle"
                 item-key="id">
-                <template #item="{element}">
+                <template #item="{element, index}">
                     <div style="display: flex; align-items: center; justify-content: space-between;">
                         <div class="handle"></div>
                         <div>{{element.name}}</div>
+                        <div>
+                            <button @click="remove(index)">X</button>
+                        </div>
                     </div>
                 </template>
             </draggable>
@@ -91,6 +94,11 @@
             })
         },
         methods: {
+            remove(idx) {
+                console.log(idx)
+                this.itemcont.splice(idx, 1)
+                this.itemlist.splice(idx, 1)
+            },
             addlist() {
                 let el = {
                     id:4,
