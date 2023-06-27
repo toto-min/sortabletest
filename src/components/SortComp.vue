@@ -21,9 +21,13 @@
                 @start="drag=true" 
                 @end="drag=false"
                 :component-data="getComponentData()"
+                handle=".handle"
                 item-key="id">
                 <template #item="{element}">
-                    <div>{{element.name}}</div>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div class="handle"></div>
+                        <div>{{element.name}}</div>
+                    </div>
                 </template>
             </draggable>
             <div>
@@ -133,5 +137,12 @@ ul, li {
 .my-handle {
 	cursor: move;
 	cursor: -webkit-grabbing;
+}
+
+.handle{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000000;
 }
 </style>
